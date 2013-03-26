@@ -21,7 +21,7 @@ function varargout = MEGDecoder(varargin)
 
 %   The CopyRight is reserved by the author.
 %   By Seyed Mostafa Kia, January, 2013
-% Last Modified by GUIDE v2.5 08-Mar-2013 17:26:24
+% Last Modified by GUIDE v2.5 26-Mar-2013 16:51:25
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -2578,3 +2578,12 @@ setappdata(handles.figure1,'features',features);
 if FileName(1,1) ~= 0 && PathName(1,1) ~=0
     save(strcat(PathName,FileName),'features');
 end
+
+
+% --------------------------------------------------------------------
+function aboutMenuItem_Callback(hObject, eventdata, handles)
+% hObject    handle to aboutMenuItem (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+helpdlg('MEGDecoder: A MATLAB GUI for MEG data decoding (developed by Seyed Mostafa Kia-2013, email:m.kia83@gmail.com)','About ...');

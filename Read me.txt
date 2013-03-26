@@ -1,0 +1,18 @@
+Prerequisites: 
+	- MATLAB (Signal and Image processing toolbox, Neural Networks toolbox)
+	- Fieldtrip (http://fieldtrip.fcdonders.nl/)
+	- Mutual Information toolbox (http://www.mathworks.com/matlabcentral/fileexchange/14888)
+	- glmnet (http://www-stat.stanford.edu/~tibs/glmnet-matlab/)
+
+Installation Notes:
+	- Install the Prerequisites.
+	- Copy the folder to your machine and change current directory of MATLAB to it or add its path to MATLAB 		paths.
+	- Run MEGDecoder.m on command line.
+	- Go to file->preferences to specify the Fieldtrip and MI pathes.
+	- Define new project using file->New Project
+	- Add subject using file-> Add subject
+	- Enjoy
+Note: This software is under development. So there is no full help documentation and toturial yet and there are some bugs.
+
+Licence:
+	- This product is under BSD licence.
