@@ -1456,9 +1456,20 @@ if isempty(features)
     end
 end
 targets = getappdata(handles.figure1,'targets');
+% if isempty(targets)
+%     file = load(projectData.targetsPath);
+%     targets = file.targets;
+% end
 if isempty(targets)
-    file = load(projectData.targetsPath);
-    targets = file.targets;
+    [FileName,PathName] = uigetfile(strcat(projectData.projectDir,'\*.mat'),'Loaing Targets');
+    try
+        file = load(strcat(PathName,FileName));
+        targets = file.targets;
+        setappdata(handles.figure1,'targets',targets);
+    catch
+        errordlg('Please a specify valid targets file.');
+        return;
+    end
 end
 cfg = [];
 cfg.crossValidationMethod = get(handles.FSCrossValidationPopup,'Value');
@@ -1723,7 +1734,9 @@ switch get(handles.classificationAlgPopup,'Value')
         %[trainedClassifier,predictedClassesTest, F ,ACC] = myGLMNET(features,targets,get(handles.FSCrossValidationPopup,'Value'),str2double(get(handles.FSFoldNumText,'String')),'gaussian');
         [trainedClassifier,predictedClassesTest, F ,ACC] = myGLMNET(features,targets,get(handles.FSCrossValidationPopup,'Value'),str2double(get(handles.FSFoldNumText,'String')),'gaussian');
     case 4
-        [trainedClassifier  predictedClassesTest F ACC] = knnClassifier(features,targets,sortedFeatureIndices,bestN,trainIndices,testIndices,projectData.config.FSCrossValidationType);
+        [trainedClassifier,  predictedClassesTest, F, ACC] = knnClassifier(features,targets,sortedFeatureIndices,bestN,trainIndices,testIndices,projectData.config.FSCrossValidationType);
+    case 5 
+        [trainedClassifier ,predictedClassesTest, F, ACC] = myGLM(features,targets,get(handles.FSCrossValidationPopup,'Value'),str2double(get(handles.FSFoldNumText,'String')),'binomial');
 end
 set(handles.classificationResultText,'String', 'Classification F1-Score: ');
 set(handles.classificationResultText,'String', strcat(get(handles.classificationResultText,'String'),' ', num2str(mean(F))));
@@ -2149,6 +2162,8 @@ if ~isempty(projectData)
     projectData = updateConfig(handles,projectData);
     [FileName,PathName] = uiputfile('*.mat','Save As Project ...','untitledPorject');
     projectData.projectName = regexprep(FileName,'.mat','');
+    projectData.projectDir = PathName;
+    setappdata(handles.figure1,'projectData',projectData);
     save(strcat(PathName,FileName),'projectData');
 end
 

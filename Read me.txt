@@ -1,5 +1,5 @@
 Prerequisites: 
-	- MATLAB (Signal and Image processing toolbox, Neural Networks toolbox, Bioinformatic toolbox)
+	- MATLAB (Signal and Image processing toolbox, Neural Networks toolbox)
 	- Fieldtrip (http://fieldtrip.fcdonders.nl/)
 	- Mutual Information toolbox (http://www.mathworks.com/matlabcentral/fileexchange/14888)
 	- glmnet (http://www-stat.stanford.edu/~tibs/glmnet-matlab/)
